@@ -7,5 +7,5 @@ go build ./...
 
 # usage
 ```
-./find_conda_pkgs path
+./find_conda_pkgs path1 path2
 ```
