@@ -22,11 +22,11 @@ func displayCondaPathsEntries(condaPathsEntries []CondaPathInfo) {
 	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
 	columnFmt := color.New(color.FgYellow).SprintfFunc()
 
-	tbl := table.New("Path", "Size")
+	tbl := table.New("Pkgs path", "Size")
 	tbl.WithHeaderFormatter(headerFmt).WithFirstColumnFormatter(columnFmt)
 
 	for _, entry := range condaPathsEntries {
-		tbl.AddRow(entry.Path, PrettifyByteSize(entry.PkgsDiskUsage))
+		tbl.AddRow(entry.PkgsPath, PrettifyByteSize(entry.PkgsDiskUsage))
 	}
 	tbl.Print()
 }

@@ -3,11 +3,13 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"sort"
 )
 
 type CondaPathInfo struct {
 	Path          string
+	PkgsPath      string
 	PkgsDiskUsage uint64
 }
 
@@ -26,14 +28,16 @@ func Main() error {
 	var condaPathsEntries []CondaPathInfo
 
 	for _, path := range condaPaths {
-		diskUsage, err := getDiskUsage(path)
+		PkgsPath := filepath.Join(path, "pkgs")
+		pkgsDiskUsage, err := getDiskUsage(PkgsPath)
 		if err != nil {
 			return err
 		}
 
 		condaPathsEntries = append(condaPathsEntries, CondaPathInfo{
 			Path:          path,
-			PkgsDiskUsage: diskUsage,
+			PkgsPath:      PkgsPath,
+			PkgsDiskUsage: pkgsDiskUsage,
 		})
 	}
 
