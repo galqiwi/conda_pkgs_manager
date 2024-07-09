@@ -5,7 +5,7 @@ conda install go
 go build ./...
 ```
 
-# usage
+# Usage
 ```
 ./find_conda_pkgs path1 path2
 ```
