@@ -14,15 +14,19 @@ type CondaPathInfo struct {
 }
 
 func Main() error {
-	if len(os.Args) != 2 {
-		return fmt.Errorf("usage: find_conda_pkgs path")
+	if len(os.Args) < 2 {
+		fmt.Println("Usage: find_conda_pkgs [PATH]...")
 	}
 
-	rootPath := os.Args[1]
+	var condaPaths []string
 
-	condaPaths, err := findAllCondaPaths(rootPath)
-	if err != nil {
-		return err
+	for _, path := range os.Args[1:] {
+		argCondaPaths, err := findAllCondaPaths(path)
+		if err != nil {
+			return err
+		}
+
+		condaPaths = append(condaPaths, argCondaPaths...)
 	}
 
 	var condaPathsEntries []CondaPathInfo
